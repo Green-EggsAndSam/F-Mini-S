@@ -1,0 +1,30 @@
+{
+  "name": "f-mini-s",
+  "version": "1.0.0",
+  "description": "Mini scale verison of First Robotics Competition FMS.",
+  "keywords": [
+    "fms",
+    "mini",
+    "frc",
+    "mini",
+    "frc"
+  ],
+  "homepage": "https://github.com/Green-EggsAndSam/F-Mini-S#readme",
+  "bugs": {
+    "url": "https://github.com/Green-EggsAndSam/F-Mini-S/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Green-EggsAndSam/F-Mini-S.git"
+  },
+  "license": "MIT",
+  "author": "Sam H-C",
+  "type": "commonjs",
+  "main": "electron/main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "devDependencies": {
+    "electron": "^39.2.5"
+  }
+}
