@@ -1,30 +1,41 @@
 {
   "name": "f-mini-s",
-  "version": "1.0.0",
-  "description": "Mini scale verison of First Robotics Competition FMS.",
-  "keywords": [
-    "fms",
-    "mini",
-    "frc",
-    "mini",
-    "frc"
-  ],
-  "homepage": "https://github.com/Green-EggsAndSam/F-Mini-S#readme",
-  "bugs": {
-    "url": "https://github.com/Green-EggsAndSam/F-Mini-S/issues"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Green-EggsAndSam/F-Mini-S.git"
-  },
-  "license": "MIT",
-  "author": "Sam H-C",
-  "type": "commonjs",
-  "main": "electron/main.js",
+  "author": "sam h-c",
+  "description": "frc fms mini",
+  "keywords": ["fms", "mini", "frc"],
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "main": "dist-electron/main.js",
   "scripts": {
-    "start": "electron ."
+    "dev:react": "vite",
+    "dev:electron": "electron .",
+    "build": "tsc -b && vite build",
+    "lint": "eslint .",
+    "preview": "vite preview",
+    "transpile:electron": "tsc --project src/electron/tsconfig.json",
+    "dist:mac": "npm run transpile:electron && npm run build && electron-builder --mac --arm64",
+    "dist:win": "npm run transpile:electron && npm run build && electron-builder --win --x64",
+    "dist:linux": "npm run transpile:electron && npm run build && electron-builder --linux --x64"
+  },
+  "dependencies": {
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0"
   },
   "devDependencies": {
-    "electron": "^39.2.5"
+    "@eslint/js": "^9.39.1",
+    "@types/node": "^24.10.1",
+    "@types/react": "^19.2.5",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^5.1.1",
+    "electron": "^39.2.7",
+    "electron-builder": "^26.0.12",
+    "eslint": "^9.39.1",
+    "eslint-plugin-react-hooks": "^7.0.1",
+    "eslint-plugin-react-refresh": "^0.4.24",
+    "globals": "^16.5.0",
+    "typescript": "~5.9.3",
+    "typescript-eslint": "^8.46.4",
+    "vite": "^7.2.4"
   }
 }

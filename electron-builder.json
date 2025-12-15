@@ -1,0 +1,15 @@
+{
+    "appId": "com.sam.F Mini S",
+    "files": ["dist-electron", "dist-react"],
+    "icon": "./images/fms-icon.png",
+    "mac":{
+        "target": "dmg"
+    },
+    "linux":{
+        "target": "appImage",
+        "category": "Utility"
+    },
+    "win": {
+        "target": ["portable", "msi"]
+    }
+}
