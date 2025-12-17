@@ -4,4 +4,7 @@ import path from 'path';
 app.on("ready", ()=> {
     const mainWindow = new BrowserWindow();
     mainWindow.loadFile(path.join(app.getAppPath(), '/dist-react/index.html'));
+
+    const secWindow = new BrowserWindow();
+    secWindow.loadFile(path.join(app.getAppPath(),'/dist-react/index.html'));
 })
