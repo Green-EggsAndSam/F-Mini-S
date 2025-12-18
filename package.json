@@ -1,10 +1,12 @@
 {
   "name": "f-mini-s",
-  "author": "sam h-c",
+  "author": "Sam H-C",
+  "version": "1.0.0",
+  "productName": "FMS",
+  "appID": "FMS",
   "description": "Mini scale First Robotics Competition FMS.",
   "keywords": ["fms", "mini", "frc"],
   "private": true,
-  "version": "0.0.0",
   "type": "module",
   "main": "dist-electron/main.js",
   "scripts": {
