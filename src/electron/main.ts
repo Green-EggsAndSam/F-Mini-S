@@ -6,5 +6,5 @@ app.on("ready", ()=> {
     mainWindow.loadFile(path.join(app.getAppPath(), '/dist-react/index.html'));
 
     const secWindow = new BrowserWindow();
-    secWindow.loadFile(path.join(app.getAppPath(),'/dist-react/index.html'));
+    secWindow.loadFile(path.join(app.getAppPath(),'/dist-react/manager.html'));
 })
