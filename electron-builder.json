@@ -2,6 +2,7 @@
     "appId": "com.sam.F Mini S",
     "files": ["dist-electron", "dist-react"],
     "icon": "./images/fms-icon.png",
+    "artifactName": "${productName} Setup.${ext}",
     "mac":{
         "target": "dmg"
     },
