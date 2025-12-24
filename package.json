@@ -1,35 +1,29 @@
 {
   "name": "f-mini-s",
   "author": "Sam H-C",
-
   "version": "1.0.0",
-
-  "comment": "The productName is the name of the exe file",
   "productName": "FMS",
   "description": "Mini scale First Robotics Competition FMS.",
-  "keywords": ["fms", "mini", "frc"],
-
+  "keywords": [
+    "fms",
+    "mini",
+    "frc"
+  ],
   "private": true,
   "type": "module",
   "main": "dist-electron/main.js",
   "scripts": {
-
-    "comment": "Runs vite or electron",
+    "dev:editor":"cross-env NODE_ENV=development electron .",
     "dev:react": "vite",
     "dev:electron": "electron .",
-
-    "comment": "Builds the dist files",
     "build:vite": "tsc -b && vite build",
     "build:electron": "tsc --project src/electron/tsconfig.json",
     "build:all": "npm run build:vite && npm run build:electron",
-
     "lint": "eslint .",
     "preview": "vite preview",
-    
-    "comment": "Create runable external files for OS systems, Ex. exe for windows",
-    "dist:mac": "npm run transpile:electron && npm run build && electron-builder --mac --arm64",
-    "dist:win": "npm run transpile:electron && npm run build && electron-builder --win --x64",
-    "dist:linux": "npm run transpile:electron && npm run build && electron-builder --linux --x64",
+    "dist:mac": "npm run build:electron && npm run build:vite && electron-builder --mac --arm64",
+    "dist:win": "npm run build:electron && npm run build:vite && electron-builder --win --x64",
+    "dist:linux": "npm run build:electron && npm run build:vite && electron-builder --linux --x64",
     "dist:all": "npm run dist:mac && npm run dist:win && npm run dist:linux"
   },
   "dependencies": {
@@ -42,6 +36,7 @@
     "@types/react": "^19.2.5",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^5.1.1",
+    "cross-env": "^10.1.0",
     "electron": "^39.2.7",
     "electron-builder": "^26.0.12",
     "eslint": "^9.39.1",

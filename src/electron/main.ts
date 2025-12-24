@@ -1,27 +1,55 @@
 import {app, BrowserWindow} from 'electron';
 import path from 'path';
 
-const devTools = true;//dev tools, inspect element
+const devTools = true;//dev tools #inspect element Change to false before dist.
+const devBrowser = true;//lets you edit the code while app is on. Change to false before dist.
+
+//creates mainWindow
+let mainWindow: BrowserWindow | null = null;
+
+//creates managerWindow
+let managerWindow: BrowserWindow| null = null;
 
 app.on("ready", ()=> {
-    //creates mainWindow
 
-    const mainWindow = new BrowserWindow({
+    //set mainWindow actual browser
+    mainWindow = new BrowserWindow({
         autoHideMenuBar: true,
 
         webPreferences: {
             devTools: devTools
         }
     });
-    mainWindow.loadFile(path.join(app.getAppPath(), '/dist-react/index.html'/*Runs on location of main html for window(main)*/));
+
+    //sets the application to whatever mode it is, "dev:editor, or dev:electron in package.json"
+    if(devBrowser)
+        mainWindow.loadURL("http://localhost:5123");//port for vite website
+    else
+        mainWindow.loadFile(path.join(app.getAppPath(), '/dist-react/index.html'/*Runs on location of main html for window(main)*/));
 
 
-    //creates managerWindow
-    const managerWindow = new BrowserWindow({
+    //sets managerWindow actual browser
+    managerWindow = new BrowserWindow({
         autoHideMenuBar: true,
         webPreferences: {
             devTools: devTools
         }
     });
-    managerWindow.loadFile(path.join(app.getAppPath(),'/dist-react/manager.html'/*Runs on location of main html for window(manager)*/));
-})
+
+    if(devBrowser)
+        managerWindow.loadURL("http://localhost:5123/manager");//port for vite website
+    else
+        managerWindow.loadFile(path.join(app.getAppPath(),'/dist-react/manager.html'/*Runs on location of main html for window(manager)*/));
+
+    mainWindow.on('closed', () => {
+
+        mainWindow = null
+        app.quit()
+    })
+
+    managerWindow.on('closed', () => {
+        managerWindow = null
+        app.quit()
+    })
+
+});
