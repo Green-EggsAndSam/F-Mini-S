@@ -1,8 +1,8 @@
 import {app, BrowserWindow} from 'electron';
 import path from 'path';
+import { isDev } from './util.js';
 
 const devTools = true;//dev tools #inspect element Change to false before dist.
-const devBrowser = true;//lets you edit the code while app is on. Change to false before dist.
 
 //creates mainWindow
 let mainWindow: BrowserWindow | null = null;
@@ -22,7 +22,7 @@ app.on("ready", ()=> {
     });
 
     //sets the application to whatever mode it is, "dev:editor, or dev:electron in package.json"
-    if(devBrowser)
+    if(isDev())
         mainWindow.loadURL("http://localhost:5123");//port for vite website
     else
         mainWindow.loadFile(path.join(app.getAppPath(), '/dist-react/index.html'/*Runs on location of main html for window(main)*/));
@@ -36,7 +36,7 @@ app.on("ready", ()=> {
         }
     });
 
-    if(devBrowser)
+    if(isDev())
         managerWindow.loadURL("http://localhost:5123/manager");//port for vite website
     else
         managerWindow.loadFile(path.join(app.getAppPath(),'/dist-react/manager.html'/*Runs on location of main html for window(manager)*/));
