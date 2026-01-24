@@ -1,0 +1,15 @@
+{
+    "matchs":[
+
+        {
+            "matchNumber": 1,
+            "redAlliance": [1, 2 ,3],
+            "blueAlloiance": [1,2,3]
+        },
+        {
+            "matchNumber": 2,
+            "redAlliance": [1, 2 ,3],
+            "blueAlloiance": [1,2,3]
+        }
+    ]
+}

@@ -15,7 +15,7 @@ function App() {
         </button>
       </div>
       <p className="read-the-docs">
-        This is the main windows
+        This is the main window
       </p>
     </>
   )
