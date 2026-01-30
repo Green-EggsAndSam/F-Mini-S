@@ -1,13 +1,12 @@
-{
-    "teams": [
-
-        {
-            "number": 1,
-            "name": "gooble"
-        },
-        {
-            "number": 2,
-            "name": "Yo Goodie"
-        }
-    ]
-}
+[
+    {
+        "number": 1,
+        "name": "Gooble",
+        "rank": 1
+    },
+    {
+        "number": 2,
+        "name": "Yo Goodie",
+        "rank": 2
+    }
+]

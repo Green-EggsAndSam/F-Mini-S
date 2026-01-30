@@ -1,5 +1,6 @@
 import {app, BrowserWindow} from 'electron';
 import path from 'path';
+import { print } from './matchMaker.js';
 import { isDev } from './util.js';
 
 const devTools = true;//dev tools #inspect element Change to false before dist.
@@ -51,5 +52,7 @@ app.on("ready", ()=> {
         managerWindow = null
         app.quit()
     })
+
+    print();
 
 });
