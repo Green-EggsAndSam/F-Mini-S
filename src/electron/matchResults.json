@@ -2,11 +2,11 @@
     {
         "matchNumber": 1,
         "time": [{"day":23},{"month":12},{"year":2026},{"hour":14},{"minute":12}],
-        "winningAlliance": "red",
         "alliance":[
 
             {
                 "color": "red",
+                "teams": ["67 Demons", "Hot Commercial", "Skylined Healers"],
                 "points": 123,
                 "autoPoints": 23,
                 "fuelScored": 400,
@@ -14,10 +14,12 @@
                 "endClimbs": 3,
                 "energizedRP": true,
                 "superchargedRP": false,
-                "traversalRP": false
+                "traversalRP": false,
+                "win": true
             },
             {
                 "color": "blue",
+                "teams": ["Gobble", "Yo Goodie", "Robo-Whales"],
                 "points": 122,
                 "autoPoints": 23,
                 "fuelScored": 400,
@@ -25,7 +27,8 @@
                 "endClimbs": 3,
                 "energizedRP": true,
                 "superchargedRP": false,
-                "traversalRP": false
+                "traversalRP": false,
+                "win": false
             }
             ]
     }
