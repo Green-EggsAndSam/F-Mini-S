@@ -2,36 +2,66 @@
     {
         "number": 1,
         "name": "Gooble",
-        "rank": 1
+        "rank": 0
     },
     {
         "number": 2,
         "name": "Yo Goodie",
-        "rank": 2
+        "rank": 0
     },
     {
         "number": 3,
         "name": "Cheeky",
-        "rank": 1
+        "rank": 0
     },
     {
         "number": 4,
         "name": "Nick",
-        "rank": 2
+        "rank": 0
     },
     {
         "number": 5,
         "name": "Sam",
-        "rank": 1
+        "rank": 0
     },
     {
         "number": 6,
         "name": "Oscar",
-        "rank": 2
+        "rank": 0
     },
     {
         "number": 7,
         "name": "Isaiah",
-        "rank": 2
+        "rank": 0
+    },
+    {
+        "number": 8,
+        "name": "Kat",
+        "rank": 0
+    },
+    {
+        "number": 9,
+        "name": "Mich",
+        "rank": 0
+    },
+    {
+        "number": 10,
+        "name": "Fred",
+        "rank": 0
+    },
+    {
+        "number": 11,
+        "name": "Hugh",
+        "rank": 0
+    },
+    {
+        "number": 12,
+        "name": "Tyler",
+        "rank": 0
+    },
+    {
+        "number": 13,
+        "name": "Julian",
+        "rank": 0
     }
 ]
