@@ -1,13 +1,28 @@
 [
-
-    {
-        "matchNumber": 1,
-        "redAlliance": [1, 2 ,3],
-        "blueAlloiance": [1, 2, 3]
-    },
-    {
-        "matchNumber": 2,
-        "redAlliance": [1, 2 ,3],
-        "blueAlliance": [1, 2, 3]
-    }
+  {
+    "number": 1,
+    "redAlliance": [
+      1,
+      2,
+      3
+    ],
+    "blueAlliance": [
+      1,
+      2,
+      3
+    ]
+  },
+  {
+    "number": 2,
+    "redAlliance": [
+      11,
+      12,
+      13
+    ],
+    "blueAlliance": [
+      11,
+      12,
+      13
+    ]
+  }
 ]
