@@ -1,5 +1,8 @@
 import { jsonToString } from './jsonUtils.js'
 import { safeWriteJSON } from './jsonUtils.js'
+import { addTeam } from './teamMaker.js'
+import { updateTeamName } from './teamMaker.js'
+import { updateTeamSkill } from './teamMaker.js'
 
 const matchSchedulePath = './src/electron/matchSchedule.json'
 const teamsPath = './src/electron/teams.json'
@@ -8,17 +11,20 @@ const teamsPath = './src/electron/teams.json'
 //matchSchedule -> JSON.parse(jsonToString(matchSchedulePath))
 
 export function print(){
-    //setInterval(()=> {}, 10000);
-        const arr = new Array(2);
-        arr[0] = matchOptions(1)[0];
-        arr[1] = matchOptions(1)[1];
-        generateMatchSchedule(arr[1],arr[0]);
+    setInterval(()=> {
+
+        addTeam(67,"Simon", 2);
+        addTeam(68,"rrr",2)
+        updateTeamName(68,"asdsad");
+        updateTeamSkill(68,3);
+        
+    }, 1000);
 }
 
 /**
  * Teams team json and returns options for the array based on input amount
  * @param optionsNum - the amount of options in the output array you want
- * @returns Returns possible options for a match in an array made of two arrays, [Matches per team, Matches total]
+ * @returns Returns possible options for a match in an array made of two arrays, [Matches total, Matches per team]
  */
 export function matchOptions( optionsNum : number){
     const teams = JSON.parse(jsonToString(teamsPath));
@@ -28,7 +34,7 @@ export function matchOptions( optionsNum : number){
     const roundsTotalOptions = new Array(optionAmount);
     
 
-    for(let i = 0; i < optionAmount; i++){
+    for(let i = 0; i < optionAmount + 1; i++){
 
         let rounds = 1;
         if(i > 0)
@@ -45,101 +51,35 @@ export function matchOptions( optionsNum : number){
         }
     }
 
-    return [roundsPerTeamOptions,roundsTotalOptions];
+    return [roundsTotalOptions, roundsPerTeamOptions];
+}
+
+/**
+ * This generates the match schedule based on the matchOptions function. 
+ * It automaticly updates the matchSchedule JSON once done loading.
+ */
+export function generateMatchSchedule(matchOptionsNum : number){
+
+    const totalMatches = matchOptions(matchOptionsNum+1)[0][matchOptionsNum];
+    const matchesPerTeam = matchOptions(matchOptionsNum+1)[1][matchOptionsNum];
+
+    let end = false;
+
+    while(!end){
+        try{
+            end = true;
+            generateMatchScheduleAttempt(totalMatches, matchesPerTeam);
+        }
+        catch{
+            end = false;
+        }
+    }
 }
 
 /**
  * Generates the match schecdule for the matchs and updates JSON
  */
-/*
-export function generateMatchSchedule(totalMatches : number, matchesPerTeam : number){
-
-    const teams = JSON.parse(jsonToString(teamsPath));
-
-    type Match = {
-        number: number,
-        redAlliance: number[],
-        blueAlliance: number[]
-    };
-
-    type MatchFile = Match[];
-
-    const matches : MatchFile = [];
-
-    /* Example
-    matches.push({
-        number: 2,
-        redAlliance: [11,12,13],
-        blueAlliance: [11,12,13]
-    });
-
-
-    const teamNumArr = new Array(teams.length);
-    //Needs an if statement to check if there are less than 12 teams, if less some teams will have back to back matches
-    for(let i = 0; i < teamNumArr.length; i++) { teamNumArr[i] = teams[i].number; }
-
-    const teamRoundsArr = new Array(teams.length).fill(0);
-    const teamLastRoundArr = new Array(teams.length).fill(false);
-
-    let end = false;
-    let matchCounter = 1;
-
-    while(!end){
-
-        //First three teams are red alliance, Second three are blue alliance
-        const alliance = new Array(6);
-
-        for(let i = 0; i < 6; i++){
-
-            let enda = false;
-
-            ranTeamLoop : 
-            while(!enda){
-                const ranTeam = Math.floor(Math.random()*(teams.length));
-
-                if(teams.length < 12){
-
-                    if(teamRoundsArr[ranTeam] < matchesPerTeam && alliance.indexOf(teamNumArr[ranTeam]) == -1){
-                    
-                        alliance[i] = teamNumArr[ranTeam];
-                        teamRoundsArr[ranTeam]++;
-                        enda = true;
-                    }
-                } else {
-
-                    if(teamRoundsArr[ranTeam] < matchesPerTeam && !teamLastRoundArr[ranTeam] && alliance.indexOf(teamNumArr[ranTeam]) == -1){
-                    
-                        alliance[i] = teamNumArr[ranTeam];
-                        teamRoundsArr[i]++;
-                        enda = true;
-                    }
-                }
-            }
-        }
-        
-        teamLastRoundArr.fill(false);
-
-        for(let i = 0; i < 6; i++){
-            teamLastRoundArr[teamNumArr.findIndex(alliance[i])] = true;
-        }
-
-        matches.push({
-        number: matchCounter,
-        redAlliance: [alliance[0],alliance[1],alliance[2]],
-        blueAlliance: [alliance[3],alliance[4],alliance[5]]
-        });
-
-        matchCounter++;
-
-        if(matchCounter > totalMatches)
-            end = true;
-    }
-
-    safeWriteJSON(matchSchedulePath, matches);
-}
-*/
-
-export function generateMatchSchedule(totalMatches : number, matchesPerTeam : number){
+function generateMatchScheduleAttempt(totalMatches : number, matchesPerTeam : number){
 
     const teams = JSON.parse(jsonToString(teamsPath));
 
@@ -190,21 +130,26 @@ export function generateMatchSchedule(totalMatches : number, matchesPerTeam : nu
 
             const alliance: number[] = [];
 
+            let count = 0;
             while (alliance.length < 6) {
+
+                if(count >= 1000 * (matchesPerTeam/Math.pow(teams.length,0.8))){
+                    throw new Error("Generate match stuck in loop");
+                }
                 const team = teamsLeft[0];
 
                 const duplicate = alliance.includes(team);
                 const backToBack =
                     teams.length >= 12 &&
-                    matchCounter < totalMatches &&
                     teamsLastMatch.includes(team);
 
                 if (!duplicate && !backToBack) {
                     alliance.push(team);
-                    teamsLeft.shift(); // consume
+                    teamsLeft.shift();
                 } else {
-                    teamsLeft.push(teamsLeft.shift()!); // rotate
+                    teamsLeft.push(teamsLeft.shift()!);
                 }
+                count++;
             }
 
 
@@ -216,6 +161,5 @@ export function generateMatchSchedule(totalMatches : number, matchesPerTeam : nu
             blueAlliance: [alliance[3],alliance[4],alliance[5]]
             });
         }
-    console.log(JSON.stringify(matches, null, 2));
     safeWriteJSON(matchSchedulePath, matches);
 }
