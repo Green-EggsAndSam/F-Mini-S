@@ -3,6 +3,7 @@ import { safeWriteJSON } from './jsonUtils.js'
 import { addTeam } from './teamMaker.js'
 import { updateTeamName } from './teamMaker.js'
 import { updateTeamSkill } from './teamMaker.js'
+import { removeTeam } from './teamMaker.js'
 
 const matchSchedulePath = './src/electron/matchSchedule.json'
 const teamsPath = './src/electron/teams.json'
@@ -17,6 +18,10 @@ export function print(){
         addTeam(68,"rrr",2)
         updateTeamName(68,"asdsad");
         updateTeamSkill(68,3);
+
+        removeTeam(83);
+        removeTeam(12);
+        removeTeam(82);
         
     }, 1000);
 }

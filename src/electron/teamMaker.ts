@@ -11,8 +11,6 @@ const teamsPath = './src/electron/teams.json'
  */
 export function addTeam( number : number, name : string, skill : number){
 
-    console.log("Working");
-
     type teamFile = {
         number : number,
         name : string,
@@ -68,6 +66,11 @@ export function addTeam( number : number, name : string, skill : number){
     safeWriteJSON(teamsPath, teams);
 }
 
+/**
+ * Updates a teams name in the team Json according to team number
+ * @param teamNum - the team number you want to change
+ * @param teamName - the name you would like to cahnge the team to
+ */
 export function updateTeamName( teamNum : number, teamName : string){
 
     if(teamName == ""){return}
@@ -90,6 +93,11 @@ export function updateTeamName( teamNum : number, teamName : string){
     safeWriteJSON(teamsPath, teams);
 }
 
+/**
+ * Updates a teams skill in the team Json according to team number
+ * @param teamNum - the teams number you would like to change
+ * @param teamSkill - the teams skill level you would like to change on a scale of 1-5
+ */
 export function updateTeamSkill( teamNum : number, teamSkill : number){
 
     if(!(teamSkill > 0 && teamSkill < 6)){return}
@@ -111,4 +119,37 @@ export function updateTeamSkill( teamNum : number, teamSkill : number){
     teams[index].skill = teamSkill;
 
     safeWriteJSON(teamsPath, teams);
+}
+
+/**
+ * Removes a team from the teams.json
+ * @param teamNumber - team number you want to remove
+ */
+export function removeTeam(teamNumber : number){
+
+    const teams = JSON.parse(jsonToString(teamsPath));
+
+    type teamFile = {
+        number : number,
+        name : string,
+        skill : number
+    };
+
+    type teamListFile = teamFile[];
+
+    const teamList : teamListFile = [];
+
+    for(let i = 0; i < teams.length; i++){
+
+        const team : teamFile = {
+            number : teams[i].number,
+            name : teams[i].name,
+            skill : teams[i].skill
+        }
+        if(!(teams[i].number == teamNumber)){
+            teamList.push(team);
+        }
+    }
+
+    safeWriteJSON(teamsPath, teamList);
 }
