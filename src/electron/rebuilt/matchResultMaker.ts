@@ -130,7 +130,6 @@ export function addRebuiltMatchResult(matchNum : number,
 
 
     const matchIndex = findMatchIndex(matchNum);
-    console.log("Match index:", matchIndex);
 
 
     if(matchIndex == -1)
@@ -324,6 +323,23 @@ export function updateClimbs(color : string, level : number, matchNum : number, 
     }
 
     safeWriteJSON(matchResultsPath, matchResults);
+}
+
+/**
+ * The match that was last recorded in matchResults.json
+ * @returns the match number of last played match, if there arn't returns 0;
+ */
+export function getLastMatchNumber(){
+
+    const raw = jsonToString(matchResultsPath);
+
+    if (!raw || raw.trim().length === 0) {
+        return 0;
+    }
+
+    const matchResults = JSON.parse(raw);
+
+    return matchResults[matchResults.length-1].matchNumber;
 }
 
 function findMatchIndex(matchNum : number){
