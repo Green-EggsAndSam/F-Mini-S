@@ -1,9 +1,6 @@
 import { jsonToString } from './jsonUtils.js'
 import { safeWriteJSON } from './jsonUtils.js'
-import { addTeam } from './teamMaker.js'
-import { updateTeamName } from './teamMaker.js'
-import { updateTeamSkill } from './teamMaker.js'
-import { removeTeam } from './teamMaker.js'
+import { getTeamSkill } from './teamMaker.js'
 
 const matchSchedulePath = './src/electron/matchSchedule.json'
 const teamsPath = './src/electron/teams.json'
@@ -14,15 +11,8 @@ const teamsPath = './src/electron/teams.json'
 export function print(){
     setInterval(()=> {
 
-        addTeam(67,"Simon", 2);
-        addTeam(68,"rrr",2)
-        updateTeamName(68,"asdsad");
-        updateTeamSkill(68,3);
+        generateMatchSchedule(0);
 
-        removeTeam(83);
-        removeTeam(12);
-        removeTeam(82);
-        
     }, 1000);
 }
 
@@ -63,28 +53,33 @@ export function matchOptions( optionsNum : number){
  * This generates the match schedule based on the matchOptions function. 
  * It automaticly updates the matchSchedule JSON once done loading.
  */
-export function generateMatchSchedule(matchOptionsNum : number){
+export async function generateMatchSchedule(matchOptionsNum : number) {
 
     const totalMatches = matchOptions(matchOptionsNum+1)[0][matchOptionsNum];
     const matchesPerTeam = matchOptions(matchOptionsNum+1)[1][matchOptionsNum];
 
     let end = false;
 
-    while(!end){
+    let attmepts = 0;
+
+    while(!end && attmepts < 100){
+        attmepts++;
         try{
             end = true;
-            generateMatchScheduleAttempt(totalMatches, matchesPerTeam);
+            await generateMatchScheduleAttempt(totalMatches, matchesPerTeam);
         }
         catch{
             end = false;
         }
     }
+
+    new Error("Match Generation Failed");
 }
 
 /**
  * Generates the match schecdule for the matchs and updates JSON
  */
-function generateMatchScheduleAttempt(totalMatches : number, matchesPerTeam : number){
+async function generateMatchScheduleAttempt(totalMatches : number, matchesPerTeam : number){
 
     const teams = JSON.parse(jsonToString(teamsPath));
 
@@ -157,7 +152,6 @@ function generateMatchScheduleAttempt(totalMatches : number, matchesPerTeam : nu
                 count++;
             }
 
-
             teamsLastMatch = [alliance[0],alliance[1],alliance[2],alliance[3],alliance[4],alliance[5]];
 
             matches.push({
@@ -165,6 +159,15 @@ function generateMatchScheduleAttempt(totalMatches : number, matchesPerTeam : nu
             redAlliance: [alliance[0],alliance[1],alliance[2],],
             blueAlliance: [alliance[3],alliance[4],alliance[5]]
             });
+
+            //make work :(
+            if(matchCounter > 1){
+                const tolerance = 3
+                const redSum = getTeamSkill(teamsLastMatch[0]) + getTeamSkill(teamsLastMatch[1]) + getTeamSkill(teamsLastMatch[2]);
+                const blueSum = getTeamSkill(teamsLastMatch[3]) + getTeamSkill(teamsLastMatch[4]) + getTeamSkill(teamsLastMatch[5]);
+                if(!(redSum + tolerance >= blueSum) && !(redSum - tolerance <= blueSum))
+                    throw new Error("Team skill not within tolerance");
+            }
         }
     safeWriteJSON(matchSchedulePath, matches);
 }

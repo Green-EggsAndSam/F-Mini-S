@@ -153,3 +153,39 @@ export function removeTeam(teamNumber : number){
 
     safeWriteJSON(teamsPath, teamList);
 }
+
+/**
+ * returns the name of the team you want
+ * @param teamNum - The team number you want the name of
+ * @returns - the team name requested
+ */
+export function getTeamName(teamNum : number){
+
+    const teams = JSON.parse(jsonToString(teamsPath));
+
+    for(let i = 0; i < teams.length; i++){
+
+        if(teams[i].number == teamNum)
+            return teams[i].name;
+    }
+
+    return null;
+}
+
+/**
+ * The skill level of the team you want
+ * @param teamNum - the team number uou want the skill level of
+ * @returns return the skill level requested
+ */
+export function getTeamSkill(teamNum : number){
+
+    const teams = JSON.parse(jsonToString(teamsPath));
+
+    for(let i = 0; i < teams.length; i++){
+
+        if(teams[i].number == teamNum)
+            return teams[i].skill;
+    }
+
+    return null;
+}
