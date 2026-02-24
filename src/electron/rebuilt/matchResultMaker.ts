@@ -197,9 +197,9 @@ export function addRebuiltMatchResult(matchNum : number,
 }
 
 /**
- * returns which color alliance 
+ * returns which color alliance won
  * @param matchNum - number of the match you want the winner of
- * @returns - a string saying red or blue, depending on winner
+ * @returns - a string saying red or blue, depending on winner, or tie if tie
  */
 export function getWinningColor(matchNum : number){
 
@@ -239,6 +239,29 @@ export function getWinningAlliance(matchNum : number){
 
 
     return matchResults[matchIndex].alliance[winningAlliance].teams;
+}
+
+/**
+ * returns the teams in alliance 
+ * @param matchNum - number of the match you want the losers of
+ * @returns - an array of the 3 losing teams on alliance
+ */
+export function getLosingAlliance(matchNum : number){
+
+    const matchIndex = findMatchIndex(matchNum);
+
+    if(matchIndex == -1)
+        return null;
+
+    const matchResults = JSON.parse(jsonToString(matchResultsPath));
+
+    let losingAlliance = 1;
+    if(!matchResults[matchIndex].alliance[0].win)
+        losingAlliance = 0;
+        
+
+
+    return matchResults[matchIndex].alliance[losingAlliance].teams;
 }
 
 /**
