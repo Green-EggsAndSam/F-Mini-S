@@ -1,19 +1,16 @@
-import { jsonToString } from './jsonUtils.js'
-import { safeWriteJSON } from './jsonUtils.js'
-import { getLastMatchNumber } from './rebuilt/matchResultMaker.js'
+import { jsonToString } from '../jsonUtils.js'
+import { safeWriteJSON } from '../jsonUtils.js'
 import { getTeamSkill } from './teamMaker.js'
 
-const matchSchedulePath = './src/electron/matchSchedule.json'
-const teamsPath = './src/electron/teams.json'
+const matchSchedulePath = './src/electron/dataRepository/matchSchedule.json'
+const teamsPath = './src/electron/dataRepository/teams.json'
 
 //teams -> JSON.parse(jsonToString(teamsPath))
 //matchSchedule -> JSON.parse(jsonToString(matchSchedulePath))
 
 export function print(){
     setInterval(()=> {
-
-        console.log(getLastMatchNumber());
-
+        
     }, 1000);
 }
 

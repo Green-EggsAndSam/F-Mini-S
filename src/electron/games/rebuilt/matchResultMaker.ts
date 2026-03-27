@@ -1,5 +1,5 @@
-import { jsonToString } from '../jsonUtils.js';
-import { safeWriteJSON } from '../jsonUtils.js';
+import { jsonToString } from '../../jsonUtils.js';
+import { safeWriteJSON } from '../../jsonUtils.js';
 
 const matchSchedulePath = './src/electron/matchSchedule.json';
 const matchResultsPath = './src/electron/matchResults.json';
@@ -220,33 +220,11 @@ export function getWinningColor(matchNum : number){
 
 /**
  * returns the teams in alliance 
- * @param matchNum - number of the match you want the winners of
- * @returns - an array of the 3 winning teams on alliance
- */
-export function getWinningAlliance(matchNum : number){
-
-    const matchIndex = findMatchIndex(matchNum);
-
-    if(matchIndex == -1)
-        return null;
-
-    const matchResults = JSON.parse(jsonToString(matchResultsPath));
-
-    let winningAlliance = 0;
-    if(!matchResults[matchIndex].alliance[0].win)
-        winningAlliance = 1;
-        
-
-
-    return matchResults[matchIndex].alliance[winningAlliance].teams;
-}
-
-/**
- * returns the teams in alliance 
  * @param matchNum - number of the match you want the losers of
+ * @param allianceColor - type the color of the allliance, string of clolr, "blue" , "red"
  * @returns - an array of the 3 losing teams on alliance
  */
-export function getLosingAlliance(matchNum : number){
+export function getAlliance(matchNum : number, allianceColor : string){
 
     const matchIndex = findMatchIndex(matchNum);
 
@@ -255,13 +233,17 @@ export function getLosingAlliance(matchNum : number){
 
     const matchResults = JSON.parse(jsonToString(matchResultsPath));
 
-    let losingAlliance = 1;
-    if(!matchResults[matchIndex].alliance[0].win)
-        losingAlliance = 0;
+    let colorIndex = 0;
+    if(allianceColor == "blue")
+        colorIndex = 1;
+    else if(allianceColor == "red")
+        colorIndex = 0;
+    else
+        return null;
         
+//finsih
 
-
-    return matchResults[matchIndex].alliance[losingAlliance].teams;
+    return matchResults[matchIndex].alliance[colorIndex].teams;
 }
 
 /**

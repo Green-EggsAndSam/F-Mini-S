@@ -1,7 +1,9 @@
 import {app, BrowserWindow} from 'electron';
 import path from 'path';
-import { print } from './matchMaker.js';
+import { print } from './dataRepoFunctions/matchMaker.js';
 import { isDev } from './util.js';
+import { ipcMain } from "electron/main"
+import { getTeamName } from './dataRepoFunctions/teamMaker.js';
 
 const devTools = true;//dev tools #inspect element Change to false before dist.
 
@@ -12,13 +14,16 @@ let mainWindow: BrowserWindow | null = null;
 let managerWindow: BrowserWindow| null = null;
 
 app.on("ready", ()=> {
-
+    ipcMain.handle("ping", () => "pong");
+    ipcMain.handle("getTeamName", (_, teamNumber) => getTeamName(teamNumber));
     //set mainWindow actual browser
     mainWindow = new BrowserWindow({
         autoHideMenuBar: true,
 
         webPreferences: {
-            devTools: devTools
+            devTools: devTools,
+            preload: path.join(app.getAppPath(), 'dist-electron/preload.js'),
+            contextIsolation: true
         }
     });
 
@@ -33,7 +38,9 @@ app.on("ready", ()=> {
     managerWindow = new BrowserWindow({
         autoHideMenuBar: true,
         webPreferences: {
-            devTools: devTools
+            devTools: devTools,
+            preload: path.join(app.getAppPath(), 'dist-electron/preload.js'),
+            contextIsolation: true
         }
     });
 

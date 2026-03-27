@@ -10,7 +10,6 @@
     "frc"
   ],
   "private": true,
-  "type": "module",
   "main": "dist-electron/main.js",
   "scripts": {
     "dev:editor": "npm-run-all --parallel dev:react dev:electronCross",

@@ -12,6 +12,9 @@ export default defineConfig({
         main: resolve(__dirname, 'index.html'),
         manager: resolve(__dirname, 'manager.html'),
       },
+      output: {
+        format: 'cjs'
+      }
     },
   },
   server:{

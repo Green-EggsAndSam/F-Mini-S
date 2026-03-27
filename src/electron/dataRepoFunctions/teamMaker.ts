@@ -1,7 +1,7 @@
-import { jsonToString } from './jsonUtils.js'
-import { safeWriteJSON } from './jsonUtils.js'
+import { jsonToString } from '../jsonUtils.js'
+import { safeWriteJSON } from '../jsonUtils.js'
 
-const teamsPath = './src/electron/teams.json'
+const teamsPath = './src/electron/dataRepository/teams.json'
 
 /**
  * Adds a team to the teams.json
