@@ -9,6 +9,10 @@ function App() {
       await window.myAPI.getTeamName(teamNumber).then(setTeamName);
   }
 
+  const loadScreenWindow = async () => {
+    await window.myAPI.loadScreenWindow();
+  }
+
   useEffect(() => {
     window.myAPI.getTeamName(1).then(setTeamName);
   }, []);
@@ -30,6 +34,9 @@ function App() {
       <p>Team Name is {teamName}</p>
       <button onClick={() => getTeamName(2)}>
           Load New Team
+      </button>
+      <button onClick={() => loadScreenWindow()}>
+          Load Screen Window
       </button>
     </>
   )

@@ -10,7 +10,7 @@ export default defineConfig({
     rollupOptions: {
       input: {
         main: resolve(__dirname, 'index.html'),
-        manager: resolve(__dirname, 'manager.html'),
+        manager: resolve(__dirname, 'screen.html'),
       },
       output: {
         format: 'cjs'

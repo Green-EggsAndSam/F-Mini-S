@@ -2,17 +2,11 @@ import { jsonToString } from '../jsonUtils.js'
 import { safeWriteJSON } from '../jsonUtils.js'
 import { getTeamSkill } from './teamMaker.js'
 
-const matchSchedulePath = './src/electron/dataRepository/matchSchedule.json'
+const matchSchedulePath = './src/electron/dataStorage/matchSchedule.json'
 const teamsPath = './src/electron/dataRepository/teams.json'
 
 //teams -> JSON.parse(jsonToString(teamsPath))
 //matchSchedule -> JSON.parse(jsonToString(matchSchedulePath))
-
-export function print(){
-    setInterval(()=> {
-        
-    }, 1000);
-}
 
 /**
  * Teams team json and returns options for the array based on input amount

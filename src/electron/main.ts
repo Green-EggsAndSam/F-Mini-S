@@ -1,6 +1,5 @@
 import {app, BrowserWindow} from 'electron';
 import path from 'path';
-import { print } from './dataRepoFunctions/matchMaker.js';
 import { isDev } from './util.js';
 import { ipcMain } from "electron/main"
 import { getTeamName } from './dataRepoFunctions/teamMaker.js';
@@ -10,12 +9,13 @@ const devTools = true;//dev tools #inspect element Change to false before dist.
 //creates mainWindow
 let mainWindow: BrowserWindow | null = null;
 
-//creates managerWindow
-let managerWindow: BrowserWindow| null = null;
+//creates screenWindow
+let screenWindow: BrowserWindow| null = null;
 
 app.on("ready", ()=> {
     ipcMain.handle("ping", () => "pong");
     ipcMain.handle("getTeamName", (_, teamNumber) => getTeamName(teamNumber));
+    ipcMain.handle("loadScreenWindow", () => loadScreenWindow());
     //set mainWindow actual browser
     mainWindow = new BrowserWindow({
         autoHideMenuBar: true,
@@ -33,9 +33,16 @@ app.on("ready", ()=> {
     else
         mainWindow.loadFile(path.join(app.getAppPath(), '/dist-react/index.html'/*Runs on location of main html for window(main)*/));
 
+    mainWindow.on('closed', () => {
 
-    //sets managerWindow actual browser
-    managerWindow = new BrowserWindow({
+        mainWindow = null;
+        app.quit();
+    })
+});
+
+function loadScreenWindow(){
+
+        screenWindow = new BrowserWindow({
         autoHideMenuBar: true,
         webPreferences: {
             devTools: devTools,
@@ -44,22 +51,8 @@ app.on("ready", ()=> {
         }
     });
 
-    if(isDev())
-        managerWindow.loadURL("http://localhost:5123/manager");//port for vite website
+         if(isDev())
+        screenWindow.loadURL("http://localhost:5123/screen");//port for vite website
     else
-        managerWindow.loadFile(path.join(app.getAppPath(),'/dist-react/manager.html'/*Runs on location of main html for window(manager)*/));
-
-    mainWindow.on('closed', () => {
-
-        mainWindow = null
-        app.quit()
-    })
-
-    managerWindow.on('closed', () => {
-        managerWindow = null
-        app.quit()
-    })
-
-    print();
-
-});
+        screenWindow.loadFile(path.join(app.getAppPath(),'/dist-react/screen.html'/*Runs on location of main html for window(screen)*/));
+}

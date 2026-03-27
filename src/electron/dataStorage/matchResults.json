@@ -1,6 +1,7 @@
 [
   {
     "matchNumber": 1,
+    "matchType": "qual",
     "time": [
       {
         "day": 19

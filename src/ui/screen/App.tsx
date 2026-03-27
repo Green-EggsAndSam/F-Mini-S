@@ -8,14 +8,14 @@ function App() {
     <>
       <div>
       </div>
-      <h1>This is the manager window</h1>
+      <h1>This is the screen window</h1>
       <div className="card">
         <button onClick={() => setCount((count) => count + 1)}>
           count is {count}
         </button>
       </div>
       <p className="read-the-docs">
-        this is the manager window
+        this is the screen window
       </p>
     </>
   )

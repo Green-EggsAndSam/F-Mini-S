@@ -1,8 +1,8 @@
 import { jsonToString } from '../../jsonUtils.js';
 import { safeWriteJSON } from '../../jsonUtils.js';
 
-const matchSchedulePath = './src/electron/matchSchedule.json';
-const matchResultsPath = './src/electron/matchResults.json';
+const matchSchedulePath = './src/electron/dataStorage/matchSchedule.json';
+const matchResultsPath = './src/electron/dataStorage/matchResults.json';
 
 /**
  * Makes a match result based on the 2026 Rebuilt game, and puts into the matchResults.json
@@ -20,7 +20,7 @@ const matchResultsPath = './src/electron/matchResults.json';
  * @param blueEndClimbsL3 
  * @param blueAutoClimbs 
  */
-export function addRebuiltMatchResult(matchNum : number,
+export function addRebuiltMatchResult(matchNum : number, matchType : string,
     redPoints : number,  redFuelScored : number, redEndClimbsL1 : number, redEndClimbsL2 : number, redEndClimbsL3 : number, redAutoClimbs : number,
     bluePoints : number,  blueFuelScored : number, blueEndClimbsL1 : number, blueEndClimbsL2 : number, blueEndClimbsL3 : number, blueAutoClimbs : number
 ){
@@ -38,6 +38,7 @@ export function addRebuiltMatchResult(matchNum : number,
 
     type matchResultFile = {
         matchNumber: number,
+        matchType: string,
         time: [{day:number},{month:number},{year:number},{hour:number},{minute:number}],
         alliance:[
 
@@ -137,6 +138,7 @@ export function addRebuiltMatchResult(matchNum : number,
 
     const matchResult : matchResultFile = {
         matchNumber: matchNum,
+        matchType: matchType,
         time: [{day:day},{month:month},{year:year},{hour:hour},{minute:minute}],
         alliance:[
 
@@ -345,6 +347,23 @@ export function getLastMatchNumber(){
     const matchResults = JSON.parse(raw);
 
     return matchResults[matchResults.length-1].matchNumber;
+}
+
+/**
+ * The match that was last recorded in matchResults.json
+ * @returns the match type of last played match, if there arn't returns null;
+ */
+export function getLastMatchType(){
+
+    const raw = jsonToString(matchResultsPath);
+
+    if (!raw || raw.trim().length === 0) {
+        return 0;
+    }
+
+    const matchResults = JSON.parse(raw);
+
+    return matchResults[matchResults.length-1].matchType;
 }
 
 function findMatchIndex(matchNum : number){
