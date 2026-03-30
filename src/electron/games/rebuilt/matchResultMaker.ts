@@ -103,10 +103,13 @@ export function addRebuiltMatchResult(matchNum : number, matchType : string,
     let redWin = false;
     let blueWin = false;
 
-    if(redPoints > bluePoints){
+    if(redPoints == bluePoints){
         redWin = true;
+        blueWin = true;
     } else if( bluePoints > redPoints){
         blueWin = true;
+    } else if (bluePoints < redPoints){
+        redWin = true;
     }
 
 

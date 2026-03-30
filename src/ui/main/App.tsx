@@ -1,45 +1,53 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import './App.css'
 
+import SideBar from './sideBar';
+import Menu from './menu'
+import Teams from './teams';
+import MatchResults from './matchResults';
+import MatchSchedule from './matchSchedule';
+import Match from './match';
+
+type Screen = 'menu' | 'teams' | 'matchSchedule' | 'matchResults' | 'match';
+
 function App() {
-  const [count, setCount] = useState(0);
-  const [teamName, setTeamName] = useState("");
+  const [currentScreen, setCurrentScreen] = useState<Screen>('menu');
+  const [isOpen, setIsOpen] = useState(true); 
 
-  const getTeamName = async (teamNumber: number) => {
-      await window.myAPI.getTeamName(teamNumber).then(setTeamName);
-  }
+  const screens = {
+    menu: <Menu />,
+    teams: <Teams />,
+    matchSchedule: <MatchSchedule />,
+    matchResults: <MatchResults />,
+    match: <Match />,
+  };
 
-  const loadScreenWindow = async () => {
-    await window.myAPI.loadScreenWindow();
-  }
+  // const getTeamName = async (teamNumber: number) => {
+  //     await window.myAPI.getTeamName(teamNumber).then(setTeamName);
+  // }
 
-  useEffect(() => {
-    window.myAPI.getTeamName(1).then(setTeamName);
-  }, []);
+  // const loadScreenWindow = async () => {
+  //   await window.myAPI.loadScreenWindow();
+  // }
+
+  // const loadRanksWindow = async () => {
+  //   await window.myAPI.loadRanksWindow();
+  // }
 
   return (
-    <>
-      <div>
+    <div style={{ display: 'flex' }}>
+      <SideBar 
+        setScreen={setCurrentScreen} 
+        isOpen={isOpen} 
+        setIsOpen={setIsOpen}
+        currentScreen={currentScreen}
+      />
+
+      <div className={`main-content ${isOpen ? 'shifted' : ''}`}>
+        {screens[currentScreen]}
       </div>
-      <h1>This is the main window</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-          <br></br>
-        </button>
-      </div>
-      <p className="read-the-docs">
-        This is the main window
-      </p>
-      <p>Team Name is {teamName}</p>
-      <button onClick={() => getTeamName(2)}>
-          Load New Team
-      </button>
-      <button onClick={() => loadScreenWindow()}>
-          Load Screen Window
-      </button>
-    </>
-  )
+    </div>
+  );
 }
 
-export default App
+export default App;

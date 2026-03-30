@@ -9,6 +9,8 @@ const devTools = true;//dev tools #inspect element Change to false before dist.
 //creates mainWindow
 let mainWindow: BrowserWindow | null = null;
 
+let ranksWindow: BrowserWindow | null = null;
+
 //creates screenWindow
 let screenWindow: BrowserWindow| null = null;
 
@@ -16,6 +18,7 @@ app.on("ready", ()=> {
     ipcMain.handle("ping", () => "pong");
     ipcMain.handle("getTeamName", (_, teamNumber) => getTeamName(teamNumber));
     ipcMain.handle("loadScreenWindow", () => loadScreenWindow());
+    ipcMain.handle("loadRanksWindow", () => loadRanksWindow());
     //set mainWindow actual browser
     mainWindow = new BrowserWindow({
         autoHideMenuBar: true,
@@ -55,4 +58,21 @@ function loadScreenWindow(){
         screenWindow.loadURL("http://localhost:5123/screen");//port for vite website
     else
         screenWindow.loadFile(path.join(app.getAppPath(),'/dist-react/screen.html'/*Runs on location of main html for window(screen)*/));
+}
+
+function loadRanksWindow(){
+
+        ranksWindow = new BrowserWindow({
+        autoHideMenuBar: true,
+        webPreferences: {
+            devTools: devTools,
+            preload: path.join(app.getAppPath(), 'dist-electron/preload.js'),
+            contextIsolation: true
+        }
+    });
+
+         if(isDev())
+        ranksWindow.loadURL("http://localhost:5123/ranks");//port for vite website
+    else
+        ranksWindow.loadFile(path.join(app.getAppPath(),'/dist-react/ranks.html'/*Runs on location of main html for window(screen)*/));
 }
