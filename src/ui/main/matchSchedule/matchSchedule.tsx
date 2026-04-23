@@ -17,21 +17,12 @@ function MatchSchedule(){
     matchesPerTeam : 0,
     matchesTotal : 0
   }
-  const op2 : MatchOption = {
-    matchesPerTeam : 1,
-    matchesTotal : 1
-  }
-
-  const op3 : MatchOption = {
-    matchesPerTeam : 2,
-    matchesTotal : 2
-  }
 
   const [matchSchedule, setMatchSchedule] = useState<Match[]>([]);
   const [selected, setSelected] = useState<MatchOption>(op1);
   const [open , setOpen] = useState(false);
   const [amt, setAmt] = useState<number>(5);
-  const [options , setOptions] = useState<MatchOption[]>([op1, op2, op3]);
+  const [options , setOptions] = useState<MatchOption[]>([op1]);
 
   // const getTeamName = async (teamNumber: number) => {
   //     await window.myAPI.getTeamName(teamNumber).then(setTeamName);
@@ -45,26 +36,25 @@ function MatchSchedule(){
 
     const ops : MatchOption[] = [];
 
-    console.log(nums.length);
-    console.log(nums);
-
     for(let i = 0; i < nums[0].length; i++){
 
       const op : MatchOption ={
         matchesPerTeam : nums[1][i],
         matchesTotal : nums[0][i]
       }
-      console.log(op);
+
       ops.push(op);
     }
 
-
-    console.log(ops);
     setOptions(ops);
+
+    if(options[0].matchesPerTeam == 0 && options[0].matchesTotal == 0){
+      setSelected(ops[0]);
+    }
   }
 
   const getSchedule = async () => {
-    await window.myAPI.getSchedule().then(setMatchSchedule);
+    await window.myAPI.getMatchSchedule().then(setMatchSchedule);
   }
 
   const getAndUpdateSchedule = async (matchesPerTeam : number, matchesTotal : number) => {
@@ -95,7 +85,7 @@ function MatchSchedule(){
     const getO = async () => {
 
       await getOptions();
-
+  
     };
 
     getO();
@@ -104,13 +94,13 @@ function MatchSchedule(){
 
   useEffect(()=> {
 
-    const getS = async () => {
+    const startUp = async () => {
 
       await getSchedule();
 
     };
 
-    getS();
+    startUp();
 
   }, [])
 
