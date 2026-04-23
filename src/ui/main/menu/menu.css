@@ -1,0 +1,210 @@
+.topBox{
+    background-color: #353545;
+    padding-top: 1px;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-bottom: 30px;
+    border-radius: 50px;
+}
+
+.popUp-screen{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(2px);
+
+    cursor: pointer;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    z-index: 1000;
+}
+
+.popUp-content{
+    background: rgba(68, 68, 88, 1);
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    border-radius: 25px;
+    padding: 35px;
+    padding-bottom: 40px;
+    overflow: auto;
+
+    width: 60%;
+    max-width: 500px;
+
+    cursor: default;
+
+    position: relative;
+}
+
+.popUp-image-dis{
+    width: 80px;
+}
+
+.popUp-btn-dis{
+    background-color: #334;
+    border-style: solid;
+    border-color: #888;
+    
+    border-width: 2px;
+    border-radius: 20px;
+    width: 80%;
+    font-size: 20px;
+}
+
+.popUp-btn-dis:hover{
+    background-color: #445;
+}
+
+.popUp-image-gmail{
+    width: 105px;
+}
+
+.popUp-btn-gmail{
+    background-color: #334;
+    border-style: solid;
+    border-color: #888;
+    border-width: 2px;
+    border-radius: 20px;
+    width: 80%;
+    font-size: 20px;
+}
+
+.popUp-btn-gmail:hover{
+    background-color: #445;
+}
+
+.popUp-image-insta{
+    width: 90px;
+}
+
+.popUp-btn-insta{
+    background-color: #334;
+    border-style: solid;
+    border-color: #888;
+    border-width: 2px;
+    border-radius: 20px;
+    width: 80%;
+    font-size: 20px;
+}
+
+.popUp-btn-insta:hover{
+    background-color: #445;
+}
+
+.title-text{
+}
+
+.logoImage{
+    width: 250px;
+}
+
+.dropdown-btn{
+    background: none;
+}
+
+.dropdown-btn:hover{
+    background: none;
+    text-decoration: underline;
+}
+
+.dropdown-content {
+    max-height: 5px;
+    overflow: hidden;
+    transition: max-height 0.6s ease-in-out, opacity 0.6s ease-in-out;
+    opacity: 0;
+    max-width: 100%;
+    margin-left: -0.1%;
+    position: relative;
+    top: -5px;
+}
+
+.dropdown-content.open {
+  max-height: 200px; /* adjust if needed */
+  opacity: 1;
+}
+
+.dropdown-img{
+    width: 10px;
+    filter: brightness(0) invert();
+    position: relative;
+    top: 2px;
+    left: -8px;
+    transition: 0.6s;
+}
+
+.dropdown-img.open{
+    transform: rotate(-270deg);
+}
+
+.helpSection{
+    background-color: #353545;
+    padding-top: 1px;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-bottom: 30px;
+    border-radius: 50px;
+    position: relative;
+    top: 20px;
+}
+
+.menu-dropdown{
+    margin-left: -0.2%;
+    text-align: left;
+}
+
+.contact{
+
+}
+
+.contact-discord-img{
+    width: 80px;
+    cursor: pointer;
+    position: relative;
+    padding: 5px;
+    position: relative;
+    top: -10px;
+}
+
+.contact-gmail-img{
+    width: 103px;
+    cursor: pointer;
+    position: relative;
+    padding: 5px;
+}
+
+.contact-insta-img{
+    width: 85px;
+    cursor: pointer;
+    position: relative;
+    padding: 1px;
+    top: -14px;
+}
+
+.contact-insta-img:hover{
+    animation: wiggle 1.5s ease-in-out infinite;
+    filter: brightness(80%);
+}
+
+.contact-discord-img:hover{
+    animation: wiggle 1.5s ease-in-out infinite;
+    filter: brightness(80%);
+}
+
+.contact-gmail-img:hover{
+    animation: wiggle 1.5s ease-in-out infinite;
+    filter: brightness(80%);
+}
+
+@keyframes wiggle {
+  0%   { transform: rotate(0deg) scale(1.1); }
+  25%  { transform: rotate(-10deg); }
+  50%  { transform: rotate(10deg) scale(1.1); }
+  75%  { transform: rotate(-10deg); }
+  100% { transform: rotate(0deg) scale(1.1); }
+}

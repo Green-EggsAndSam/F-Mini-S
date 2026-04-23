@@ -2,17 +2,17 @@ import { useState } from 'react'
 import './App.css'
 
 import SideBar from './sideBar';
-import Menu from './menu'
-import Teams from './teams';
-import MatchResults from './matchResults';
-import MatchSchedule from './matchSchedule';
-import Match from './match';
+import Menu from './menu/menu'
+import Teams from './teams/teams';
+import MatchResults from './matchResults/matchResults';
+import MatchSchedule from './matchSchedule/matchSchedule';
+import Match from './match/match';
 
 type Screen = 'menu' | 'teams' | 'matchSchedule' | 'matchResults' | 'match';
 
 function App() {
   const [currentScreen, setCurrentScreen] = useState<Screen>('menu');
-  const [isOpen, setIsOpen] = useState(true); 
+  const [isOpen, setIsOpen] = useState(true);
 
   const screens = {
     menu: <Menu />,
@@ -43,7 +43,14 @@ function App() {
         currentScreen={currentScreen}
       />
 
-      <div className={`main-content ${isOpen ? 'shifted' : ''}`}>
+      <div
+        className="main-content"
+        style={{
+          marginLeft:'60px',
+          transition: '0.3s',
+          padding: '20px'
+        }}
+      >
         {screens[currentScreen]}
       </div>
     </div>

@@ -9,15 +9,16 @@
   position: fixed;
   top: 0;
   left: 0;
-  height: 100vh;
-  background: #111;
+  height: 100%;
+  background: #252535;
   color: white;
-  transition: 0.4s;
+  transition: 0.3s;
   overflow: hidden;
+  z-index: 100;
 }
 
 .sidenav.open {
-  width: 200px;
+  width: 300px;
 }
 
 .sidenav.closed {
@@ -28,19 +29,24 @@
   background: none;
   border: none;
   color: white;
-  font-size: 20px;
   padding: 10px;
   cursor: pointer;
+}
+
+.toggle-btn:hover{
+  background: none;
 }
 
 .logo-text {
   padding: 10px;
   font-weight: bold;
+  font-size: 20px;
 }
 
 .nav-list {
   list-style: none;
   padding: 0;
+  font-size: 25px;
 }
 
 .nav-list button {
@@ -55,10 +61,24 @@
 }
 
 .nav-list button:hover {
-  background: #333;
+  background: #353545;
 }
 
 .nav-list button.active {
-  background: #555;
+  background: #454555;
   font-weight: bold;
+}
+
+.toggle-btn {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 24px;
+  padding: 10px;
+  cursor: pointer;
+  transition: transform 0.5s ease;
+}
+
+.toggle-btn.open {
+  transform: rotate(90deg) scale(1.4); 
 }

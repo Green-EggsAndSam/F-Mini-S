@@ -21,8 +21,8 @@ const matchResultsPath = './src/electron/dataStorage/matchResults.json';
  * @param blueAutoClimbs 
  */
 export function addRebuiltMatchResult(matchNum : number, matchType : string,
-    redPoints : number,  redFuelScored : number, redEndClimbsL1 : number, redEndClimbsL2 : number, redEndClimbsL3 : number, redAutoClimbs : number,
-    bluePoints : number,  blueFuelScored : number, blueEndClimbsL1 : number, blueEndClimbsL2 : number, blueEndClimbsL3 : number, blueAutoClimbs : number
+    redPoints : number,  redFuelScored : number, redEndClimbsL1 : number, redEndClimbsL2 : number, redEndClimbsL3 : number, redAutoClimbs : number, redAutoFuelScored : number,
+    bluePoints : number,  blueFuelScored : number, blueEndClimbsL1 : number, blueEndClimbsL2 : number, blueEndClimbsL3 : number, blueAutoClimbs : number, blueAutoFuelScored : number
 ){
 
     let matchResults = [];
@@ -47,6 +47,7 @@ export function addRebuiltMatchResult(matchNum : number, matchType : string,
                 teams: [number, number, number],
                 points: number,
                 fuelScored: number,
+                autoFuelScored: number,
                 autoClimbs: number,
                 endClimbsL1: number,
                 endClimbsL2: number,
@@ -61,6 +62,7 @@ export function addRebuiltMatchResult(matchNum : number, matchType : string,
                 teams: [number, number, number],
                 points: number,
                 fuelScored: number,
+                autoFuelScored: number,
                 autoClimbs: number,
                 endClimbsL1: number,
                 endClimbsL2: number,
@@ -150,6 +152,7 @@ export function addRebuiltMatchResult(matchNum : number, matchType : string,
                 teams: [matchSchedule[matchIndex].redAlliance[0], matchSchedule[matchIndex].redAlliance[1], matchSchedule[matchIndex].redAlliance[2]],
                 points: redPoints,
                 fuelScored: redFuelScored,
+                autoFuelScored: redAutoFuelScored,
                 autoClimbs: redAutoClimbs,
                 endClimbsL1: redEndClimbsL1,
                 endClimbsL2: redEndClimbsL2,
@@ -164,6 +167,7 @@ export function addRebuiltMatchResult(matchNum : number, matchType : string,
                 teams: [matchSchedule[matchIndex].blueAlliance[0], matchSchedule[matchIndex].blueAlliance[1], matchSchedule[matchIndex].blueAlliance[2]],
                 points: bluePoints,
                 fuelScored: blueFuelScored,
+                autoFuelScored: blueAutoFuelScored,
                 autoClimbs: blueAutoClimbs,
                 endClimbsL1: blueEndClimbsL1,
                 endClimbsL2: blueEndClimbsL2,

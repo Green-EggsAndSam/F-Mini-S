@@ -3,7 +3,7 @@ import { safeWriteJSON } from '../jsonUtils.js'
 import { getTeamSkill } from './teamMaker.js'
 
 const matchSchedulePath = './src/electron/dataStorage/matchSchedule.json'
-const teamsPath = './src/electron/dataRepository/teams.json'
+const teamsPath = './src/electron/dataStorage/teams.json'
 
 //teams -> JSON.parse(jsonToString(teamsPath))
 //matchSchedule -> JSON.parse(jsonToString(matchSchedulePath))
@@ -42,13 +42,30 @@ export function matchOptions( optionsNum : number){
 }
 
 /**
+ * Updates match schedule json and returns match schedule
+ * @param matchesPerTeam
+ * @param totalMatches
+ * @returns A Match[] containing match
+ */
+export async function getAndUpdateMatchSchedule(matchesPerTeam : number, totalMatches : number){
+    let schedule
+    generateMatchSchedule(matchesPerTeam, totalMatches).then(schedule = JSON.parse(jsonToString(matchSchedulePath)));
+    
+    return schedule;
+}
+
+/**
+ * @returns match schedule
+ */
+export function getMatchSchedule(){
+    return JSON.parse(jsonToString(matchSchedulePath));
+}
+
+/**
  * This generates the match schedule based on the matchOptions function. 
  * It automaticly updates the matchSchedule JSON once done loading.
  */
-export async function generateMatchSchedule(matchOptionsNum : number) {
-
-    const totalMatches = matchOptions(matchOptionsNum+1)[0][matchOptionsNum];
-    const matchesPerTeam = matchOptions(matchOptionsNum+1)[1][matchOptionsNum];
+export async function generateMatchSchedule(matchesPerTeam : number, totalMatches : number) {
 
     let end = false;
 

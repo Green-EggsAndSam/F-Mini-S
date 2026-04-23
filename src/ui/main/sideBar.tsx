@@ -17,21 +17,21 @@ const SideBar = ({
     const items: { screen: Screen; label: string }[] = [
         { screen: 'menu', label: 'Home' },
         { screen: 'teams', label: 'Teams' },
-        { screen: 'matchResults', label: 'Match Results' },
         { screen: 'matchSchedule', label: 'Match Schedule' },
+        { screen: 'matchResults', label: 'Match Results' },
         { screen: 'match', label: 'Match Runner' },
     ];
 
-
   return (
-    <div className={`sidenav ${isOpen ? 'open' : 'closed'}`}>
+    <div className={`sidenav ${isOpen ? 'open' : 'closed'}`} onMouseLeave={() => setIsOpen(false)}>
 
-      <button 
-        className="toggle-btn"
+    <button 
+        className={`toggle-btn ${isOpen ? 'open' : ''}`}
         onClick={() => setIsOpen(!isOpen)}
-      >
+    >
         ☰
-      </button>
+    </button>
+
 
       {isOpen && (
         <>

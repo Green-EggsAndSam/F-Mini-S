@@ -1,8 +1,9 @@
-import {app, BrowserWindow} from 'electron';
+import {app, BrowserWindow, shell} from 'electron';
 import path from 'path';
 import { isDev } from './util.js';
 import { ipcMain } from "electron/main"
-import { getTeamName } from './dataRepoFunctions/teamMaker.js';
+import { getTeamName, getTeamNamesList, getTeamNumList, getTeamSkillList, writeNewTeamJson } from './dataRepoFunctions/teamMaker.js';
+import { getAndUpdateMatchSchedule, getMatchSchedule, matchOptions } from './dataRepoFunctions/matchMaker.js';
 
 const devTools = true;//dev tools #inspect element Change to false before dist.
 
@@ -14,11 +15,23 @@ let ranksWindow: BrowserWindow | null = null;
 //creates screenWindow
 let screenWindow: BrowserWindow| null = null;
 
+function openLink(url: string) {
+  shell.openExternal(url);
+}
+
 app.on("ready", ()=> {
     ipcMain.handle("ping", () => "pong");
     ipcMain.handle("getTeamName", (_, teamNumber) => getTeamName(teamNumber));
     ipcMain.handle("loadScreenWindow", () => loadScreenWindow());
     ipcMain.handle("loadRanksWindow", () => loadRanksWindow());
+    ipcMain.handle("openLinkExternally", (_, url) => openLink(url));
+    ipcMain.handle("getTeamNameList", () => getTeamNamesList());
+    ipcMain.handle("getTeamNumberList", () => getTeamNumList());
+    ipcMain.handle("getTeamSkillList", () => getTeamSkillList());
+    ipcMain.handle("updateTeamsJson", (_, teams) => writeNewTeamJson(teams));
+    ipcMain.handle("getMatchOptions", (_, amt) => matchOptions(amt));
+    ipcMain.handle("getAndUpdateMatchSchedule", (_, matchesPerTeam, matchesTotal) => getAndUpdateMatchSchedule(matchesPerTeam, matchesTotal));
+    ipcMain.handle("getMatchSchedule", () => getMatchSchedule());
     //set mainWindow actual browser
     mainWindow = new BrowserWindow({
         autoHideMenuBar: true,

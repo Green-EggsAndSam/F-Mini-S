@@ -1,0 +1,176 @@
+.teams-table{
+    background-color: #353545;
+    border-radius: 50px;
+    padding: 30px;
+    padding-bottom: 100px;
+   border-spacing: 20px;
+   min-width: 650px;
+}
+
+.team-item-layout{
+    
+}
+
+.team-num-label{
+    position: relative;
+    left: -40px;
+    font-size: 30px;
+}
+
+.team-name-label{
+    position: relative;
+    left: -35px;
+    font-size: 30px;
+}
+
+.team-skill-label{
+    position: relative;
+    left: -30px;
+    font-size: 30px;
+}
+
+.team-num.valid{
+    background-color: #454555;
+    position: relative;
+    text-align: center;
+    padding-left: 10px;
+    border-radius: 10px;
+    left: -40px;
+    width: 80px;
+    height: 30px;
+    padding: 5px;
+    font-size: 30px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+
+}
+
+.team-num.not-valid{
+    background-color: #757585;
+    text-align: center;
+    position: relative;
+    padding-left: 10px;
+    left: -40px;
+    width: 80px;
+    height: 30px;
+    padding: 5px;
+    font-size: 30px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.team-name.valid{
+    background-color: #454555;
+    border-radius: 10px;
+    position: relative;
+    left: -35px;
+    min-width: 350px;
+    height: 30px;
+    padding: 5px;
+    padding-left: 10px;
+    font-size: 25px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.team-name.not-valid{
+    background-color: #757585;
+    position: relative;
+    padding-left: 10px;
+    left: -35px;
+    min-width: 350px;
+    height: 30px;
+    padding: 5px;
+    font-size: 25px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.team-skill.valid{
+    background-color: #454555;
+    border-radius: 10px;
+    text-align: center;
+    position: relative;
+    left: -30px;
+    width: 35px;
+    height: 30px;
+    padding: 5px;
+    padding-left: 10px;
+    font-size: 30px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.team-skill.not-valid{
+    background-color: #757585;
+    position: relative;
+    text-align: center;
+    left: -30px;
+    width: 35px;
+    height: 30px;
+    padding: 5px;
+    padding-left: 10px;
+    font-size: 30px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.team-remove-btn{
+    position: relative;
+    top: 1px;
+    width: 10px;
+    height: 10px;
+    background: none;
+}
+
+.team-remove-btn:hover{
+    position: relative;
+    top: 1px;
+    width: 10px;
+    height: 10px;
+    background: none;
+}
+
+.team-remove-btn-image{
+    position: relative;
+    left: -30px;
+    filter: invert();
+    height: 30px;
+    top: -2px;
+}
+
+.team-add-btn{
+    background-color: #454555;
+    position:relative;
+    width: 595px;
+    height: 50px;
+    padding: 5px;
+    top: -95px;
+    font-size: 30px;
+    outline-style:inset;
+    outline-color: #858585;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    
+}
+
+.team-add-btn:hover{
+    background-color: #555565;
+}
+
+.jsonUpdated-img-false{
+    position: fixed;
+    top: 90%;
+    left: 14px;
+    z-index: 1000;
+    filter: brightness(0) invert();
+    width: 35px;
+    animation: syncing 1s ease-in-out infinite;
+}
+
+.jsonUpdated-img-true{
+    position: fixed;
+    top: 90%;
+    left: 14px;
+    z-index: 1000;
+    filter: brightness(0) invert();
+    width: 35px;
+}
+
+@keyframes syncing {
+    0%   { transform: rotate(0deg); }
+    100% { transform: rotate(720deg); }
+}

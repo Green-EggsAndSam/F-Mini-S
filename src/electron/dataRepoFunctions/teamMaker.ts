@@ -3,6 +3,12 @@ import { safeWriteJSON } from '../jsonUtils.js'
 
 const teamsPath = './src/electron/dataStorage/teams.json'
 
+type teamFile = {
+        number : number,
+        name : string,
+        skill : number
+    };
+
 /**
  * Adds a team to the teams.json
  * @param number - Teams Number
@@ -63,6 +69,14 @@ export function addTeam( number : number, name : string, skill : number){
     }
     }
 
+    safeWriteJSON(teamsPath, teams);
+}
+
+/**
+ * wrties the teams array provided stright to the teams file
+ * @param teams - TeamInput[] type
+ */
+export function writeNewTeamJson(teams : teamFile[]){
     safeWriteJSON(teamsPath, teams);
 }
 
@@ -188,4 +202,55 @@ export function getTeamSkill(teamNum : number){
     }
 
     return null;
+}
+
+/**
+ * returns a list of all teams numbers
+ */
+export function getTeamNumList(){
+
+    const nums : number[] = [];
+
+    const teams = JSON.parse(jsonToString(teamsPath));
+
+    for(let i = 0; i < teams.length; i++){
+
+        nums.push(teams[i].number);
+    }
+
+    return nums;
+}
+
+/**
+ * returns a list of all teams names
+ */
+export function getTeamNamesList(){
+
+    const names : string[] = [];
+
+    const teams = JSON.parse(jsonToString(teamsPath));
+
+    for(let i = 0; i < teams.length; i++){
+
+        names.push(teams[i].name);
+    }
+
+    return names;
+}
+
+/**
+ * returns a list of all teams skills
+ */
+export function getTeamSkillList(){
+
+    const skills : number[] = [];
+
+    const teams = JSON.parse(jsonToString(teamsPath));
+
+    for(let i = 0; i < teams.length; i++){
+
+        skills.push(teams[i].skill);
+    }
+
+    return skills;
 }
