@@ -12,7 +12,7 @@ type Screen = 'menu' | 'teams' | 'matchSchedule' | 'matchResults' | 'match';
 
 function App() {
   const [currentScreen, setCurrentScreen] = useState<Screen>('menu');
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
 
   const screens = {
     menu: <Menu />,

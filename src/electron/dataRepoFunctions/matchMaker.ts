@@ -171,7 +171,7 @@ async function generateMatchScheduleAttempt(totalMatches : number, matchesPerTea
 
             //make work :(
             if(matchCounter > 1){
-                const tolerance = 3
+                const tolerance = 3 
                 const redSum = getTeamSkill(teamsLastMatch[0]) + getTeamSkill(teamsLastMatch[1]) + getTeamSkill(teamsLastMatch[2]);
                 const blueSum = getTeamSkill(teamsLastMatch[3]) + getTeamSkill(teamsLastMatch[4]) + getTeamSkill(teamsLastMatch[5]);
                 if(!(redSum + tolerance >= blueSum) && !(redSum - tolerance <= blueSum))
